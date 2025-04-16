@@ -65,3 +65,8 @@ function love.keypressed(key)
     menu:select(key)
     
 end 
+
+
+function love.mousepressed(x,y,button)
+    menu:mousepressed(x,y,button)
+end

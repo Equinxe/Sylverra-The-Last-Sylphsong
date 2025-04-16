@@ -16,6 +16,9 @@ sprites.environment.lockedDoor = love.graphics.newImage('sprites/environment/loc
 
 
 
+sprites.ui = {}
+sprites.ui.startScreen = love.graphics.newImage('sprites/ui/Sylverra-main-menu.png')
+
 function initFonts()
     fonts = {}
     fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 12*scale)
