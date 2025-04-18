@@ -1,7 +1,7 @@
 menu = {}
 menu.options = {
-    newGame = {text = "Nouvelle partie", x = 850 , y = 320 , width = 200, height = 30},
-    continue = {text = "Continuer", x = 850, y = 360 , width = 200 , height = 30},
+    newGame = {text = "Nouvelle partie", x = 1475 , y = 405 , width = 250, height = 30},
+    continue = {text = "Continuer", x = 1475, y = 450 , width = 200 , height = 30},
     options = {text = "Options", x = 850 , y = 400 , width = 200, height = 30},
     quit = {text = "Quitter" , x = 850, y = 440, width = 200, height = 30}
 }
