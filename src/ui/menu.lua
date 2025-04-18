@@ -27,8 +27,8 @@ menu.buttonPositions = {
 function menu:load()
     menu.background = love.graphics.newImage('sprites/ui/menu_background.png') -- Chemin de votre image sans texte
     
-    local baseY = window_Height * 0.25
-    local spacing = 60 * scale
+    local baseY = window_Height * 0.355
+    local spacing = 20 * scale
     
     menu.buttonPositions.new_game = {}
     menu.buttonPositions.continue = {}
