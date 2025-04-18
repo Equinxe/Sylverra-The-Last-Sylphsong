@@ -17,6 +17,7 @@ end
 
 --update load values
 function love.update(dt)
+    menu:update(dt)
     updateAll(dt)
 end
 
@@ -37,7 +38,13 @@ end
 
 function love.keypressed(key)
     if key == 'escape' then
+        if gamestate > 0 then
+            gamestate = 0 
+            menu.activeMenu = "main"
+            menu.selection = 1 
+        else
         love.event.quit()
+        end
     end
 
 
@@ -59,12 +66,17 @@ function love.keypressed(key)
         else
             setWindowSize(true)
         end
-    reinitSize()
+        reinitSize()
+        menu:load()
     end
 
-    menu:select(key)
-    
-end 
+    if gamestate == 0 then 
+        if key == "z" or key == "up" or key == "s" or key == "down" or key == "q" or key == "left" or key == "d" or key == "right" or key == "return" or key == "space" then
+            menu:select(key)
+        end
+    end
+end
+
 
 
 function love.mousepressed(x,y,button)
