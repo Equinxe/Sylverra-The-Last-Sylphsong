@@ -17,7 +17,6 @@ end
 
 --update load values
 function love.update(dt)
-    menu:update(dt)
     updateAll(dt)
 end
 

@@ -13,7 +13,7 @@ function updateGame(dt)
     if globalStun > 0 then return end 
 
     flux.update(dt)
-
+    menu:update(dt)
 
     player:update(dt)
     world:update(dt)
