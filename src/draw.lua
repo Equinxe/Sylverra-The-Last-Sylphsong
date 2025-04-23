@@ -1,5 +1,11 @@
 function drawBeforeCamera()
-    menu:draw()
+    if gamestate == 0 then 
+        if menu.activeMenu == "main" then 
+            menu:draw()
+        elseif (menu.activeMenu == "new_game" or menu.activeMenu == "continue" ) and menuSave.options[menuSave.activeMenu] then
+            menuSave:draw()
+        end
+    end
 end
 
 

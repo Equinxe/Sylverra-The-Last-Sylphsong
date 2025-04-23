@@ -17,7 +17,8 @@ sprites.environment.lockedDoor = love.graphics.newImage('sprites/environment/loc
 
 
 sprites.ui = {}
-sprites.ui.menuBackground = love.graphics.newImage('sprites/ui/menu_background.png')
+sprites.ui.menuBackground = love.graphics.newImage('sprites/ui/Sylverra-no-menu.png')
+sprites.ui.menuSave = love.graphics.newImage('sprites/ui/Save-no-text.png')
 
 function initFonts()
     fonts = {}
@@ -26,8 +27,9 @@ function initFonts()
     fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 12*scale)
     
     -- Nouvelles fonts pour le menu
-    fonts.title = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 32*scale)
+    fonts.title = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 18*scale)
     fonts.menu = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 12*scale)
     fonts.small = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 5*scale)
+    fonts.runes = love.graphics.newFont("fonts/tengwar_annatar/tngan.ttf" , 12*scale)
 end
 initFonts() 

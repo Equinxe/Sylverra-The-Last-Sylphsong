@@ -1,4 +1,10 @@
 function updateAll(dt)
+    menu:update(dt)
+
+    if menuSave then 
+        menuSave:update(dt)
+    end
+    
     updateGame(dt)
 
     if gameMap then 
@@ -13,7 +19,7 @@ function updateGame(dt)
     if globalStun > 0 then return end 
 
     flux.update(dt)
-    menu:update(dt)
+    --menu:update(dt)
 
     player:update(dt)
     world:update(dt)

@@ -23,5 +23,6 @@ function requireAll()
     require("src/levels/wall")
 
 
-    require("src/ui/menu")
+    require("src/ui/menu/menu_main")
+    require("src/ui/menu/menu_save")
 end
