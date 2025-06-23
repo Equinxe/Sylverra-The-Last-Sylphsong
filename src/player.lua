@@ -1,5 +1,5 @@
 -- Player movement-----
- player = world:newBSGRectangleCollider(234, 184, 12, 12, 3)
+ player = world:newBSGRectangleCollider(200, 184, 10, 10, 3)
  player.x = 0
  player.y = 0
  player.dir = "down"
@@ -130,9 +130,7 @@ function player:draw()
     else
         love.graphics.setColor(1,1,1,1)
     end
+    
+    player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-5, nil, 1, 1, 8, 16)
 
-    love.graphics.draw(sprites.playerShadow, player:getX(), player:getY()+5, nil ,nil, nil , sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
-
-    -- Pas de flip, utilisation des vraies animations gauche/droite
-    player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, 1, 1, 9.5, 10.5)
 end
