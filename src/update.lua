@@ -10,6 +10,11 @@ function updateAll(dt)
     if gameMap then 
         gameMap:update(dt)
     end
+
+    if gamestate == 1 and data and data.lastSaveTime then 
+        data.playTime = data.playTime + dt 
+    end
+    
     checkWindowSize()
 end 
 

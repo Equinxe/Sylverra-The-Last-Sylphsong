@@ -1,4 +1,4 @@
- -- Player movement-----
+-- Player movement-----
  player = world:newBSGRectangleCollider(234, 184, 12, 12, 3)
  player.x = 0
  player.y = 0
@@ -36,18 +36,16 @@
     player:setFixedRotation(true)
     player:setLinearDamping(player.baseDamping)
 
-
-    player.grid = anim8.newGrid(19, 21, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
+    player.grid = anim8.newGrid(16, 32, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
 
     player.animations = {}
     player.animations.down = anim8.newAnimation(player.grid('1-4', 1), player.animSpeed)
     player.animations.right = anim8.newAnimation(player.grid('1-4', 2), player.animSpeed)
     player.animations.up = anim8.newAnimation(player.grid('1-4', 3), player.animSpeed)
-    player.animations.left = anim8.newAnimation(player.grid('1-4',4), player.animSpeed)
+    player.animations.left = anim8.newAnimation(player.grid('1-4', 4), player.animSpeed)
+    player.animations.idle = anim8.newAnimation(player.grid('1-1', 1), 1) -- Animation statique
 
-    player.anim = player.animations.down
-
-    --player.buffer = {}
+    player.anim = player.animations.idle
 
  function player:update(dt)
     if player.state == -1 then return end 
@@ -58,75 +56,65 @@
     local dirX = 0 
     local dirY = 0
 
+    -- Input handling - SEULEMENT les variables locales
     if love.keyboard.isDown("z") or love.keyboard.isDown("up") then
         dirY = -1
-        player.dirY = -1
     end
 
     if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
         dirX = 1
-        player.dirX = 1
     end
     
     if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
         dirY = 1
-        player.dirY = 1
     end
 
     if love.keyboard.isDown("q") or love.keyboard.isDown("left") then
         dirX = -1
-        player.dirX = -1
-    end
-    
-
-    if dirY == 0  and dirX ~= 0 then
-        player.dirY = 1
     end
 
-   if dirX == 0 and dirY == 0 then
+    -- Walking state
+    if dirX == 0 and dirY == 0 then
         if player.walking then
             player.walking = false
-            -- player:justStop()
         end
-    else
+    else 
         player.walking = true
     end
-    
-    
-    
-    
-    if player.walking then
-        if player.dirX == 1 then
-            if player.dirY == 1 then
-                player.anim = player.animations.right
-            else
-                player.anim = player.animations.up
-            end
-        else
-            if player.dirY == 1 then
-                player.anim = player.animations.left
-            else
-                player.anim = player.animations.down
-            end
-        end
-    end
-    
 
+    -- Animation logic - mise à jour des directions du player
+    if player.walking then
+        if dirY == -1 then
+            player.anim = player.animations.up
+            player.dir = "up"
+            player.dirY = -1
+        elseif dirY == 1 then
+            player.anim = player.animations.down
+            player.dir = "down"
+            player.dirY = 1
+        elseif dirX == -1 then
+            player.anim = player.animations.left
+            player.dir = "left"
+            player.dirX = -1
+            player.dirY = 0  -- Important: reset dirY pour mouvement purement horizontal
+        elseif dirX == 1 then 
+            player.anim = player.animations.right
+            player.dir = "right"
+            player.dirX = 1
+            player.dirY = 0  -- Important: reset dirY pour mouvement purement horizontal
+        end
+    else
+        -- Animation statique quand le joueur ne bouge pas
+        player.anim = player.animations.idle
+    end
+
+    -- Apply movement
     local vec = vector(dirX, dirY):normalized() * player.speed
     if vec.x ~= 0 or vec.y ~= 0 then
         player:setLinearVelocity(vec.x, vec.y)
     end
-   -- if dirX == 0 and dirY == 0 then
-       -- if player.walking then
-          --  player.walking = false
-           -- player:justStop()
-       -- end
-   -- else player.walking = true
-    --end 
 
     player.anim:update(dt)
-
-    --player:processBuffer(dt)
 end
 
 function player:draw()
@@ -145,5 +133,6 @@ function player:draw()
 
     love.graphics.draw(sprites.playerShadow, player:getX(), player:getY()+5, nil ,nil, nil , sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
 
-    player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, player.dirX, 1, 9.5, 10.5)
+    -- Pas de flip, utilisation des vraies animations gauche/droite
+    player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, 1, 1, 9.5, 10.5)
 end

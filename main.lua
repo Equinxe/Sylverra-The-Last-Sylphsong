@@ -77,7 +77,7 @@ function love.keypressed(key)
     end
 
     if gamestate == 0 then
-        if key == "z" or key == "up" or key == "s" or key == "down" or key == "q" or key == "left" or key == "d" or key == "right" or key == "return" or key == "space" then
+        if key == "z" or key == "up" or key == "s" or key == "down" or key == "q" or key == "left" or key == "d" or key == "right" or key == "return" or key == "space"  then
             if menu.activeMenu == "main" and not transition.active then
                 menu:select(key)
             elseif menu.activeMenu == "new_game" or menu.activeMenu == "continue" then
